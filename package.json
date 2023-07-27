@@ -1,0 +1,25 @@
+{
+  "name": "out-of-order-events",
+  "version": "1.0.0",
+  "type": "module",
+  "packageManager": "pnpm@8.6.10",
+  "scripts": {
+    "type-check": "tsc",
+    "test": "tsx --test --test-reporter=spec $(glob '**/*.test.ts')",
+    "lint": "eslint .",
+    "format": "prettier --write './**/*.ts'"
+  },
+  "devDependencies": {
+    "@tsconfig/node18": "^18.2.0",
+    "@tsconfig/strictest": "^2.0.1",
+    "@types/node": "^18",
+    "cli-glob": "^0.1.0",
+    "eslint": "^8.45.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-import": "npm:eslint-plugin-i@2.27.5-4",
+    "eslint-plugin-prettier": "^5.0.0",
+    "prettier": "^3.0.0",
+    "tsx": "^3.12.7",
+    "typescript": "^5.1.6"
+  }
+}
