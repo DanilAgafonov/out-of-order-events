@@ -16,8 +16,8 @@ export class AdvancedAsyncStorage implements IAsyncStorage {
     eventTime: Date,
   ) {
     if (this.#storage[id]) {
-      const lastEventTime = this.#lastEventTimeById[id];
-      if (lastEventTime && eventTime <= lastEventTime) {
+      const lastEventTime = this.#lastEventTimeById[id]!;
+      if (eventTime <= lastEventTime) {
         return;
       }
       throw new Error(
@@ -34,8 +34,18 @@ export class AdvancedAsyncStorage implements IAsyncStorage {
     data: { id: string; name: string },
     eventTime: Date,
   ) {
-    this.#storage[id] = data;
-    this.#lastEventTimeById[id] = eventTime;
+    if (!this.#storage[id]) {
+      throw new Error(`Item with id ${id} already exists`);
+    }
+
+    const lastEventTime = this.#lastEventTimeById[id]!;
+
+    if (eventTime > lastEventTime) {
+      this.#storage[id] = data;
+      this.#lastEventTimeById[id] = eventTime;
+    } else {
+      return;
+    }
   }
 
   async remove(id: string, eventTime: Date) {
